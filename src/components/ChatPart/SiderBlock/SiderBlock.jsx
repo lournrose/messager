@@ -7,7 +7,7 @@ import UsersService from "../../../API/UsersService";
 import useFetching from "../../../hooks/useFetching";
 const { Title, Text } = Typography;
 
-const SiderBlock = ({setSelectedUserId}) => {
+const SiderBlock = ({setSelectedUserId, selectedUserId}) => {
     const [users, setUsers] = useState([])
     const [search, setSearch] = useState('')
     const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ const SiderBlock = ({setSelectedUserId}) => {
                 <Input value={search} onChange={e => setSearch(e.target.value)} placeholder="Поиск..." prefix={<SearchOutlined />} className="input-svg-gray"/>
             </div>
             {users && <div style={{height: 'calc(100vh - 64px)', overflow: 'auto'}}>
-                {searchedUsers.map((user, i) => <UserItem key={i} user={user} onClick={() => setSelectedUserId(user.id)}/>)}
+                {searchedUsers.map((user, index) => <UserItem key={index} user={user} onClick={() => setSelectedUserId(user.id)} selectedUserId={selectedUserId}/>)}
             </div>}
             <Modal open={open} footer={false} onCancel={() => setOpen(false)}>
                 <Title level={5} style={{textAlign: 'center'}}>Информация</Title>

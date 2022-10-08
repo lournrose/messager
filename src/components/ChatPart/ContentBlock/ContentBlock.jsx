@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import MessageItem from "./MessageItem";
 import {Input, Typography} from "antd";
-import {MailOutlined, SmileOutlined} from "@ant-design/icons";
+import {LoadingOutlined, MailOutlined, SmileOutlined} from "@ant-design/icons";
 import letterIcon from '../../../images/letter-icon.svg';
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
@@ -23,11 +23,9 @@ const ContentBlock = ({selectedUserId}) => {
     })
     useEffect(() => {
         content_block.current.scrollTo(0, content_block.current.scrollHeight)
-    }, [messages])
+    })
     useEffect(() => {
-        console.log('selecte duser id изменился')
         fetchMessages();
-        console.log(content_block.current.scrollHeight)
     }, [selectedUserId])
     const addEmoji = (e) => {
         let sym = e.unified.split("-");
@@ -38,15 +36,18 @@ const ContentBlock = ({selectedUserId}) => {
     }
     const sendMessage = () => {
         messages.push({body: messageSend, my: true});
-        console.log('Jnhgfbdfd', messageSend)
         setMessageSend('');
         setShowEmojis(false);
     }
     return (
         <div style={{padding: '0 10px', marginTop: '15px'}}>
-            <div style={{height: '772px', overflow: 'auto', width: '100%'}} className="chat-scroll" ref={content_block}>
-                <div style={{width: '680px', margin: '0 auto'}}>
-                    {messages.map(message => <MessageItem name={message?.title} message={message.body} my={message?.my}/>)}
+            <div style={{height: '772px', overflow: isLoading ? 'hidden' : 'auto', width: '100%'}} className="chat-scroll" ref={content_block}>
+                <div style={{width: '680px', margin: '0 auto', height: '100%'}}>
+                    {isLoading ?
+                        <LoadingOutlined style={{color: '#FF7875', fontSize: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%'}}/>
+                        :
+                        messages.map((message, index) => <MessageItem name={message?.title} message={message.body} my={message?.my} key={index}/>)
+                    }
                 </div>
             </div>
             <div style={{

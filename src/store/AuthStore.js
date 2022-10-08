@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 
 class AuthStore {
-    auth = false;
+    auth = true;
     constructor() {
         makeAutoObservable(this);
     }

@@ -9,14 +9,14 @@ const AppRouter = observer(() => {
     return AuthStore.auth ? (
         <Switch>
             {privateRoutes.map(({path, Component}) =>
-                <Route path={path} component={Component} exact={true}/>
+                <Route path={path} component={Component} exact={true} key={path}/>
             )}
             <Redirect to={CHAT_ROUTE}/>
         </Switch>
     ) : (
         <Switch>
             {publicRoutes.map(({path, Component}) =>
-                <Route path={path} component={Component} exact={true}/>
+                <Route path={path} component={Component} exact={true} key={path}/>
             )}
             <Redirect to={LOGIN_ROUTE}/>
         </Switch>
