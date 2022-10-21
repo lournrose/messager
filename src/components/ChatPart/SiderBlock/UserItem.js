@@ -16,13 +16,13 @@ const UserItem = ({user, selectedUserId, ...props}) => {
             cursor: 'pointer',
         }} className={clsx(selectedUserId === user.id ? 'main-bg' : 'message-hover')} {...props}>
             <div style={{position: 'absolute', right: '10px', top: '5px'}}>
-                <CheckOutlined style={{color: '#FF7875', marginRight: '4px'}}/>
-                <Text strong type="secondary">22.07.14</Text>
+                <CheckOutlined style={{marginRight: '4px'}} className={clsx(selectedUserId === user.id ? 'white-font' : 'main-font')}/>
+                <Text strong style={{color: selectedUserId === user.id ? 'white' : 'darkgray'}}>22.07.14</Text>
             </div>
             <Avatar size={50} icon={<UserOutlined/>} style={{marginRight: '10px'}}/>
             <div style={{lineHeight: '1.2'}}>
-                <Title level={4} style={{margin: 0}}>{user.name}</Title>
-                <Text type="secondary" strong>{user.email}</Text>
+                <Title level={4} style={{margin: 0, color: selectedUserId === user.id ? 'white' : 'black'}}>{user.name}</Title>
+                <Text style={{color: selectedUserId === user.id ? 'white' : 'darkgray'}} strong>{user.email}</Text>
             </div>
         </div>
     );

@@ -35,13 +35,18 @@ const ContentBlock = ({selectedUserId}) => {
         setMessageSend(messageSend + emoji);
     }
     const sendMessage = () => {
-        messages.push({body: messageSend, my: true});
-        setMessageSend('');
-        setShowEmojis(false);
+        if(messageSend) {
+            messages.push({body: messageSend, my: true});
+            setMessageSend('');
+            setShowEmojis(false);
+        }
     }
     return (
-        <div style={{padding: '0 10px', marginTop: '15px'}}>
-            <div style={{height: '772px', overflow: isLoading ? 'hidden' : 'auto', width: '100%'}} className="chat-scroll" ref={content_block}>
+        <div style={{padding: '0 10px', marginTop: '15px', position: 'relative'}}>
+            <div style={{position: 'absolute', zIndex: 99999, left: '50%', transform: 'translate(-50%, 0)', top: '10px'}}>
+                <Text style={{backgroundColor:  'rgba(0,0,0,40%)', padding: '7px 13px', borderRadius: '25px', backdropFilter: 'blur(5px)', color: 'white', fontSize: '16px'}}>Сегодня</Text>
+            </div>
+            <div style={{height: '772px', overflow: isLoading ? 'hidden' : 'auto', width: '100%', position: 'relative'}} className="chat-scroll" ref={content_block}>
                 <div style={{width: '680px', margin: '0 auto', height: '100%'}}>
                     {isLoading ?
                         <LoadingOutlined style={{color: '#FF7875', fontSize: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%'}}/>
